@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Forbidden Connection | 单元小说生成引擎</title>
+    <style>
+        :root {
+            --bg-color: #0f1115;
+            --panel-color: #1a1d23;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-color: #238636;
+            --accent-hover: #2ea043;
+            --warning-color: #d29922;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 左侧控制面板 */
+        .control-panel {
+            width: 45%;
+            padding: 20px;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            background-color: var(--panel-color);
+        }
+
+        /* 右侧输出面板 */
+        .output-panel {
+            width: 55%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-color);
+        }
+
+        h1 { font-size: 1.2rem; color: var(--accent-color); margin-top: 0; letter-spacing: 2px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        h2 { font-size: 0.9rem; color: var(--text-secondary); margin: 15px 0 10px 0; text-transform: uppercase; }
+
+        .section-box {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .full-width { grid-column: span 2; }
+
+        label { display: block; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 5px; }
+        textarea, input, select {
+            width: 100%;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        textarea:focus { border-color: var(--accent-color); outline: none; }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 10px; }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary { background-color: var(--accent-color); color: white; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-secondary { background-color: #30363d; color: var(--text-primary); }
+
+        #output-content {
+            flex: 1;
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            color: #d1d5db;
+        }
+
+        .loading { color: var(--accent-color); font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel">
+        <h1>ORACLE CONTROL UNIT</h1>
+
+        <!-- 初级板块 -->
+        <div class="section-box">
+            <h2>初级板块 (核心框架)</h2>
+            <div class="grid">
+                <div class="full-width">
+                    <label>世界观设定</label>
+                    <textarea id="worldview" rows="3">“世界大战之后”的世界，文明毁灭，人类在城市遗迹上修筑了多层巨型建筑。</textarea>
+                </div>
+                <div class="full-width">
+                    <label>人物设定 (姓名/性格/地位/关系)</label>
+                    <textarea id="characters" rows="4">千户(主角，冷静理智，喜欢读书，驾驶员)；尤莉(主角，乐天派，喜欢吃，枪手)。两人为相依为命的旅行同伴。</textarea>
+                </div>
+                <div>
+                    <label>故事明面设定</label>
+                    <textarea id="explicit_setting" rows="3">几乎没有人了，废墟中充满了战争残留的危险机器，资源匮乏。</textarea>
+                </div>
+                <div>
+                    <label>故事暗面设定 (AI遵循但不直说)</label>
+                    <textarea id="hidden_setting" rows="3">人类正在不可逆转地走向完全灭绝，两人的旅行终点是生命的终点。</textarea>
+                </div>
+                <div class="full-width">
+                    <label>主线</label>
+                    <input type="text" id="main_plot" value="往城市的最上层走，寻找生存的希望或终点。">
+                </div>
+                <div>
+                    <label>文风选择</label>
+                    <input type="text" id="style_desc" value="带有哀伤但温暖的末日感。">
+                </div>
+                <div>
+                    <label>故事主题风格</label>
+                    <input type="text" id="theme" value="诙谐、幽默与反战的悲剧。">
+                </div>
+                <div class="full-width">
+                    <label>伏笔池 (填坑提醒)</label>
+                    <textarea id="foreshadowing" rows="2">随处可见的白色奇怪雕像（其实是新人类）；收音机里断断续续的杂音。</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- 高级板块 -->
+        <div class="section-box">
+            <h2>高级板块 (深度逻辑)</h2>
+            <div class="grid">
+                <div>
+                    <label>内涵设定</label>
+                    <input type="text" id="inner_meaning" value="对战争的无声批判。">
+                </div>
+                <div>
+                    <label>AI 模型选择</label>
+                    <select id="ai_choice">
+                        <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                        <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label>人物成长设定 (阶段性变化)</label>
+                    <input type="text" id="character_growth" value="小千开始怀疑记录历史的意义 (进度: 1/15章)">
+                </div>
+                <div class="full-width">
+                    <label>输出协议 (强制要求)</label>
+                    <textarea id="output_rules" rows="3">所有人物对话必须用“…6……”代替，严禁输出真实对白内容！每章产出约2000字。</textarea>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="checkConflict()">🔍 设定冲突检查</button>
+                <button class="btn-primary" onclick="generateStory()">🚀 执行神谕 (生成本章)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="output-panel">
+        <h2>生成结果 / 输出区</h2>
+        <div id="output-content">等待初始化指令...</div>
+    </div>
+
+    <script>
+        function getPayload() {
+            return {
+                worldview: document.getElementById('worldview').value,
+                characters: document.getElementById('characters').value,
+                main_plot: document.getElementById('main_plot').value,
+                explicit_setting: document.getElementById('explicit_setting').value,
+                hidden_setting: document.getElementById('hidden_setting').value,
+                style_desc: document.getElementById('style_desc').value,
+                theme: document.getElementById('theme').value,
+                global_influence: "无",
+                foreshadowing: document.getElementById('foreshadowing').value,
+                inner_meaning: document.getElementById('inner_meaning').value,
+                output_rules: document.getElementById('output_rules').value,
+                character_growth: document.getElementById('character_growth').value
+            };
+        }
+
+        async function checkConflict() {
+            const out = document.getElementById('output-content');
+            out.innerHTML = '<span class="loading">正在调用逻辑扫描仪，分析设定矛盾点...</span>';
+            try {
+                const res = await fetch('/check_conflict', { // 使用相对路径
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(getPayload())
+                });
+                const data = await res.json();
+                out.innerText = "[逻辑冲突报告]\n\n" + data.content;
+            } catch(e) {
+                out.innerHTML = '<span style="color:red">连接失败：请确保后端 Python 已运行，并通过 http://127.0.0.1:8000 访问。</span>';
+            }
+        }
+
+        async function generateStory() {
+            const out = document.getElementById('output-content');
+            out.innerHTML = '<span class="loading">正在加载单元剧本，演算因果律中...（由于字数要求较长，请等待约30秒）</span>';
+            try {
+                const res = await fetch('/generate_chapter', { // 使用相对路径
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(getPayload())
+                });
+                const data = await res.json();
+                out.innerText = data.content;
+            } catch(e) {
+                out.innerHTML = '<span style="color:red">生成失败：网络请求被拦截或后端报错。</span>';
+            }
+        }
+    </script>
+</body>
+</html>
