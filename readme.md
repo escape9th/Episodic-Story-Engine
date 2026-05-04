@@ -12,7 +12,9 @@
 *   《虫师》（Mushishi）
 
 ## 📸 运行效果展示
-*(上传到 GitHub 后，请在这里拖入你运行成功的截图)*
+<img width="1015" height="1016" alt="80aca5038a7eb16b9a0f68a2a3d3fece" src="https://github.com/user-attachments/assets/d36181b7-c4e8-4b50-97af-c04a1542c7b7" />
+<img width="800" height="395" alt="d0885ba3c2f2894d46a12ade7fef2b2e" src="https://github.com/user-attachments/assets/c1239d0b-daf5-4a3a-a7f9-2562a6055ffa" />
+<img width="831" height="894" alt="17c7ec6d6a026430a4f029844398f69c" src="https://github.com/user-attachments/assets/fa6669c1-25ba-4cf2-9c14-ec2f862ec7e7" />
 
 ## ⚙️ 核心板块设定 (以《少女终末旅行》为例)
 
